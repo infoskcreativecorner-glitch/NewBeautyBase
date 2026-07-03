@@ -334,28 +334,30 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof gsap !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fade-in elements and text blocks globally
-    gsap.utils.toArray('.reveal-up, h1, h2, h3, .section-subtitle, .story-text-container p, .hero-content p, .hero-content .subtitle').forEach((elem) => {
-      gsap.fromTo(elem, 
-        { y: 35, opacity: 0 },
-        { 
-          y: 0, 
-          opacity: 1, 
-          duration: 1.2, 
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: elem,
-            start: 'top 90%',
-            toggleActions: 'play none none none'
+    // Fade-in elements and text blocks globally (excluding header elements like logo text)
+    gsap.utils.toArray('.reveal-up, h1, h2, h3, .section-subtitle, .story-text-container p, .hero-content p, .hero-content .subtitle')
+      .filter(elem => !elem.closest('header'))
+      .forEach((elem) => {
+        gsap.fromTo(elem, 
+          { y: 15, opacity: 0 },
+          { 
+            y: 0, 
+            opacity: 1, 
+            duration: 0.8, 
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: elem,
+              start: 'top 92%',
+              toggleActions: 'play none none none'
+            }
           }
-        }
-      );
-    });
+        );
+      });
 
     // Parallax on images
     gsap.utils.toArray('.parallax-img').forEach((img) => {
       gsap.to(img, {
-        yPercent: -15,
+        yPercent: -8,
         ease: 'none',
         scrollTrigger: {
           trigger: img,
@@ -383,11 +385,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, observerOptions);
 
-    const reveals = document.querySelectorAll('.reveal-up, h1, h2, h3, .section-subtitle');
+    const reveals = Array.from(document.querySelectorAll('.reveal-up, h1, h2, h3, .section-subtitle'))
+      .filter(elem => !elem.closest('header'));
+      
     reveals.forEach(rev => {
       rev.style.opacity = '0';
-      rev.style.transform = 'translateY(35px)';
-      rev.style.transition = 'all 1.2s cubic-bezier(0.25, 1, 0.5, 1)';
+      rev.style.transform = 'translateY(15px)';
+      rev.style.transition = 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
       observer.observe(rev);
     });
   }
@@ -514,6 +518,113 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       });
+    });
+  }
+
+  // 11. Redesigned Accordion Price List Behavior
+  const accordions = document.querySelectorAll('.service-accordion-card');
+  if (accordions.length > 0) {
+    // Open first accordion by default
+    accordions[0].classList.add('open');
+    
+    accordions.forEach(card => {
+      const trigger = card.querySelector('.accordion-trigger');
+      if (trigger) {
+        trigger.addEventListener('click', () => {
+          const wasOpen = card.classList.contains('open');
+          // Close all cards
+          accordions.forEach(c => c.classList.remove('open'));
+          // If it wasn't open, open it
+          if (!wasOpen) {
+            card.classList.add('open');
+          }
+        });
+      }
+    });
+  }
+
+  // 12. Sticky Category Scroll Sync and Smooth Scrolling
+  const priceStickyNav = document.getElementById('price-nav-container');
+  if (priceStickyNav) {
+    window.addEventListener('scroll', () => {
+      const rect = priceStickyNav.getBoundingClientRect();
+      if (rect.top <= 76) {
+        priceStickyNav.classList.add('sticky-nav-active');
+      } else {
+        priceStickyNav.classList.remove('sticky-nav-active');
+      }
+    });
+  }
+
+  const priceNavBtns = document.querySelectorAll('.price-nav-btn');
+  if (priceNavBtns.length > 0 && accordions.length > 0) {
+    priceNavBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = btn.getAttribute('href');
+        const targetCard = document.querySelector(targetId);
+        
+        if (targetCard) {
+          const card = targetCard.querySelector('.service-accordion-card');
+          // Open the card
+          accordions.forEach(c => c.classList.remove('open'));
+          if (card) {
+            card.classList.add('open');
+          }
+          
+          // Scroll smoothly to card
+          const headerOffset = 180;
+          const elementPosition = targetCard.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+
+          // Active tab button highlight
+          priceNavBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        }
+      });
+    });
+  }
+
+  // 13. Before & After Transformation Tab Filter Interactivity
+  const transBtns = document.querySelectorAll('#trans-tabs-container .tab-btn');
+  const transItems = document.querySelectorAll('.trans-item');
+  if (transBtns.length > 0 && transItems.length > 0) {
+    transBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        transBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const filter = btn.getAttribute('data-trans-filter');
+        transItems.forEach(item => {
+          if (item.classList.contains(filter)) {
+            item.style.display = 'block';
+            item.style.opacity = '0';
+            setTimeout(() => {
+              item.style.transition = 'opacity 0.4s ease';
+              item.style.opacity = '1';
+            }, 50);
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  // 14. Floating Book Now Smooth Scroll Click Behavior
+  const floatBookBtn = document.getElementById('floating-book-now');
+  if (floatBookBtn) {
+    floatBookBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
     });
   }
 
