@@ -11,13 +11,7 @@
 </head>
 <body>
 
-  <!-- Floating Elements -->
-  <a href="https://wa.me/919962055273" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-  <div class="back-to-top" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
-  </div>
+
 
   <!-- Header Navigation -->
   <header>
@@ -250,6 +244,21 @@
     <a href="contact.html" class="floating-btn book-btn" id="floating-book-now" aria-label="Book Appointment">
       <i class="far fa-calendar-alt"></i><span>Book Now</span>
     </a>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="salon-lightbox" class="lightbox-modal" aria-hidden="true">
+    <span class="lightbox-close">&times;</span>
+    <div class="lightbox-content-wrapper">
+      <img class="lightbox-content" id="lightbox-img" alt="Zoomed Salon View">
+      <div id="lightbox-caption"></div>
+    </div>
+    <!-- Zoom Controls -->
+    <div class="lightbox-controls">
+      <button class="zoom-btn" id="zoom-in-btn" aria-label="Zoom In"><i class="fas fa-search-plus"></i></button>
+      <button class="zoom-btn" id="zoom-out-btn" aria-label="Zoom Out"><i class="fas fa-search-minus"></i></button>
+      <button class="zoom-btn" id="zoom-reset-btn" aria-label="Reset Zoom"><i class="fas fa-sync-alt"></i></button>
+    </div>
   </div>
 
   <!-- Scripts -->

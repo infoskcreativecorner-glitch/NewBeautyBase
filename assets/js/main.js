@@ -119,19 +119,28 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const filterValue = btn.getAttribute('data-filter');
         
-        galleryItems.forEach(item => {
-          if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-            item.style.display = 'block';
-            setTimeout(() => {
-              item.style.opacity = '1';
-              item.style.transform = 'scale(1)';
-            }, 50);
-          } else {
-            item.style.opacity = '0';
-            item.style.transform = 'scale(0.8)';
-            setTimeout(() => {
-              item.style.display = 'none';
-            }, 400);
+        // Phase 1: Fade out all items smoothly
+        gsap.to(galleryItems, {
+          opacity: 0,
+          scale: 0.95,
+          duration: 0.2,
+          overwrite: 'auto',
+          onComplete: () => {
+            // Phase 2: Toggle display states instantly
+            galleryItems.forEach(item => {
+              if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                item.style.display = 'block';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+            
+            // Phase 3: Fade in the active items with a premium stagger effect
+            const activeItems = galleryItems.filter(item => item.style.display === 'block');
+            gsap.fromTo(activeItems, 
+              { opacity: 0, scale: 0.95 },
+              { opacity: 1, scale: 1, duration: 0.3, ease: 'power1.out', stagger: 0.02, overwrite: 'auto' }
+            );
           }
         });
       });
@@ -521,22 +530,60 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 11. Redesigned Accordion Price List Behavior
+  // 11. Redesigned Accordion Price List Behavior with GSAP
   const accordions = document.querySelectorAll('.service-accordion-card');
   if (accordions.length > 0) {
-    // Open first accordion by default
-    accordions[0].classList.add('open');
+    // Open first accordion by default on load
+    const firstCard = accordions[0];
+    firstCard.classList.add('open');
+    const firstContent = firstCard.querySelector('.accordion-content');
+    if (firstContent) {
+      firstContent.style.height = 'auto';
+      firstContent.style.opacity = '1';
+    }
     
     accordions.forEach(card => {
       const trigger = card.querySelector('.accordion-trigger');
-      if (trigger) {
+      const content = card.querySelector('.accordion-content');
+      if (trigger && content) {
         trigger.addEventListener('click', () => {
-          const wasOpen = card.classList.contains('open');
+          const isOpen = card.classList.contains('open');
+          
           // Close all cards
-          accordions.forEach(c => c.classList.remove('open'));
-          // If it wasn't open, open it
-          if (!wasOpen) {
+          accordions.forEach(c => {
+            if (c !== card && c.classList.contains('open')) {
+              const cContent = c.querySelector('.accordion-content');
+              if (cContent) {
+                gsap.to(cContent, {
+                  height: 0,
+                  opacity: 0,
+                  duration: 0.3,
+                  ease: 'power1.inOut',
+                  onComplete: () => {
+                    c.classList.remove('open');
+                  }
+                });
+              }
+            }
+          });
+          
+          // Toggle clicked card
+          if (isOpen) {
+            gsap.to(content, {
+              height: 0,
+              opacity: 0,
+              duration: 0.3,
+              ease: 'power1.inOut',
+              onComplete: () => {
+                card.classList.remove('open');
+              }
+            });
+          } else {
             card.classList.add('open');
+            gsap.fromTo(content, 
+              { height: 0, opacity: 0 },
+              { height: 'auto', opacity: 1, duration: 0.4, ease: 'power2.out' }
+            );
           }
         });
       }
@@ -566,13 +613,44 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (targetCard) {
           const card = targetCard.querySelector('.service-accordion-card');
-          // Open the card
-          accordions.forEach(c => c.classList.remove('open'));
-          if (card) {
+          const content = card ? card.querySelector('.accordion-content') : null;
+          
+          // Close all other open cards
+          accordions.forEach(c => {
+            if (c !== card && c.classList.contains('open')) {
+              const cContent = c.querySelector('.accordion-content');
+              if (cContent) {
+                gsap.to(cContent, {
+                  height: 0,
+                  opacity: 0,
+                  duration: 0.2,
+                  onComplete: () => c.classList.remove('open')
+                });
+              }
+            }
+          });
+          
+          // Open target card
+          if (card && !card.classList.contains('open')) {
             card.classList.add('open');
+            gsap.fromTo(content, 
+              { height: 0, opacity: 0 },
+              { height: 'auto', opacity: 1, duration: 0.35, ease: 'power2.out' }
+            );
           }
 
-
+          // Smooth scroll to target card
+          setTimeout(() => {
+            const headerOffset = 160; // Offset height for navs
+            const elementPosition = targetCard.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }, 80);
+          
           // Active tab button highlight
           priceNavBtns.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
@@ -786,18 +864,131 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 16. WhatsApp Floating Button Scroll Expansion
-  const whatsappBtn = document.querySelector('.whatsapp-btn');
-  if (whatsappBtn) {
-    const handleWhatsappScroll = () => {
-      if (window.scrollY > 150) {
-        whatsappBtn.classList.add('expanded');
-      } else {
-        whatsappBtn.classList.remove('expanded');
+  // 17. Workspace Gallery Lightbox with Zoom and Drag/Pan Controls
+  const salonLightbox = document.getElementById('salon-lightbox');
+  const salonLightboxImg = document.getElementById('lightbox-img');
+  const salonLightboxCaption = document.getElementById('lightbox-caption');
+  const salonGalleryItems = document.querySelectorAll('.gallery-item-home.salon img');
+  const salonCloseBtn = document.querySelector('.lightbox-close');
+
+  if (salonLightbox && salonLightboxImg && salonGalleryItems.length > 0) {
+    let currentScale = 1.0;
+    let isDraggingImg = false;
+    let startX = 0, startY = 0;
+    let translateX = 0, translateY = 0;
+
+    // Open Lightbox
+    salonGalleryItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        salonLightboxImg.src = item.src;
+        salonLightboxCaption.textContent = item.alt || 'Salon Interior';
+        salonLightbox.classList.add('show');
+        salonLightbox.setAttribute('aria-hidden', 'false');
+        resetZoom();
+      });
+    });
+
+    // Close Lightbox
+    const closeLightbox = () => {
+      salonLightbox.classList.remove('show');
+      salonLightbox.setAttribute('aria-hidden', 'true');
+      resetZoom();
+    };
+
+    if (salonCloseBtn) {
+      salonCloseBtn.addEventListener('click', closeLightbox);
+    }
+    salonLightbox.addEventListener('click', (e) => {
+      if (e.target === salonLightbox || e.target.classList.contains('lightbox-content-wrapper')) {
+        closeLightbox();
+      }
+    });
+
+    // Zoom Controls
+    const salonZoomInBtn = document.getElementById('zoom-in-btn');
+    const salonZoomOutBtn = document.getElementById('zoom-out-btn');
+    const salonZoomResetBtn = document.getElementById('zoom-reset-btn');
+
+    const updateTransform = () => {
+      salonLightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+    };
+
+    const zoomIn = () => {
+      if (currentScale < 3.0) {
+        currentScale += 0.25;
+        updateTransform();
       }
     };
-    window.addEventListener('scroll', handleWhatsappScroll);
-    handleWhatsappScroll(); // init check
+
+    const zoomOut = () => {
+      if (currentScale > 0.5) {
+        currentScale -= 0.25;
+        updateTransform();
+      }
+    };
+
+    const resetZoom = () => {
+      currentScale = 1.0;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    };
+
+    if (salonZoomInBtn) salonZoomInBtn.addEventListener('click', zoomIn);
+    if (zoomOutBtn) salonZoomOutBtn.addEventListener('click', zoomOut);
+    if (salonZoomResetBtn) salonZoomResetBtn.addEventListener('click', resetZoom);
+
+    // Keyboard controls
+    document.addEventListener('keydown', (e) => {
+      if (!salonLightbox.classList.contains('show')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === '=' || e.key === '+') zoomIn();
+      if (e.key === '-') zoomOut();
+      if (e.key === '0') resetZoom();
+    });
+
+    // Mouse Drag/Pan Controls for zoomed image
+    const imgWrapper = document.querySelector('.lightbox-content-wrapper');
+    if (imgWrapper) {
+      imgWrapper.addEventListener('mousedown', (e) => {
+        if (currentScale <= 1.0) return; // only pan when zoomed in
+        isDraggingImg = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDraggingImg) return;
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDraggingImg = false;
+      });
+
+      // Touch Drag/Pan Controls
+      imgWrapper.addEventListener('touchstart', (e) => {
+        if (currentScale <= 1.0) return;
+        isDraggingImg = true;
+        startX = e.touches[0].clientX - translateX;
+        startY = e.touches[0].clientY - translateY;
+      }, { passive: true });
+
+      imgWrapper.addEventListener('touchmove', (e) => {
+        if (!isDraggingImg) return;
+        translateX = e.touches[0].clientX - startX;
+        translateY = e.touches[0].clientY - startY;
+        updateTransform();
+      }, { passive: true });
+
+      imgWrapper.addEventListener('touchend', () => {
+        isDraggingImg = false;
+      });
+    }
   }
 
   injectDecorations();
