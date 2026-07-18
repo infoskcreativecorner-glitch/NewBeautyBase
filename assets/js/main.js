@@ -571,16 +571,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (card) {
             card.classList.add('open');
           }
-          
-          // Scroll smoothly to card
-          const headerOffset = 180;
-          const elementPosition = targetCard.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
+
 
           // Active tab button highlight
           priceNavBtns.forEach(b => b.classList.remove('active'));
@@ -626,6 +617,187 @@ document.addEventListener('DOMContentLoaded', () => {
         contactSection.scrollIntoView({ behavior: 'smooth' });
       }
     });
+  }
+
+  // 15. Home Testimonials Auto Slider Carousel
+  const tTrack = document.querySelector('.home-testimonials-track');
+  const tCards = document.querySelectorAll('.home-testimonials-track .testimonial-card-item');
+  const tDotsContainer = document.querySelector('.slider-dots-container');
+  if (tTrack && tCards.length > 0 && tDotsContainer) {
+    let tIndex = 0;
+    
+    function getCardsPerView() {
+      if (window.innerWidth <= 768) return 1;
+      if (window.innerWidth <= 991) return 2;
+      return 3;
+    }
+    
+    let cardsPerView = getCardsPerView();
+    
+    function createDots() {
+      tDotsContainer.innerHTML = '';
+      const totalDots = tCards.length - cardsPerView + 1;
+      for (let i = 0; i < totalDots; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('slider-dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          goToSlide(i);
+          resetAutoSlide();
+        });
+        tDotsContainer.appendChild(dot);
+      }
+    }
+    
+    function goToSlide(idx) {
+      const maxIndex = tCards.length - cardsPerView;
+      let targetIdx = idx;
+      if (targetIdx > maxIndex) targetIdx = 0;
+      if (targetIdx < 0) targetIdx = maxIndex;
+      tIndex = targetIdx;
+      
+      const cardWidth = tCards[0].offsetWidth;
+      // Calculate layout shift offset including margins
+      const translation = tIndex * (cardWidth + 20); // 20px is margins combined
+      tTrack.style.transform = `translateX(-${translation}px)`;
+      
+      // Update active dot
+      const dots = tDotsContainer.querySelectorAll('.slider-dot');
+      dots.forEach((dot, dIdx) => {
+        dot.classList.toggle('active', dIdx === tIndex);
+      });
+    }
+    
+    let tInterval = setInterval(() => {
+      goToSlide(tIndex + 1);
+    }, 4500);
+    
+    function resetAutoSlide() {
+      clearInterval(tInterval);
+      tInterval = setInterval(() => {
+        goToSlide(tIndex + 1);
+      }, 4500);
+    }
+    
+    window.addEventListener('resize', () => {
+      const newCardsPerView = getCardsPerView();
+      if (newCardsPerView !== cardsPerView) {
+        cardsPerView = newCardsPerView;
+        createDots();
+        goToSlide(0);
+      } else {
+        // Recalculate layout translation on resize even if cards per view is same
+        goToSlide(tIndex);
+      }
+    });
+    
+    createDots();
+
+    // Swipe/Drag Functionality
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+
+    const slider = document.querySelector('.home-testimonials-slider');
+    if (slider && tTrack) {
+      // Prevent dragging links
+      tTrack.querySelectorAll('a').forEach(el => {
+        el.addEventListener('dragstart', (e) => e.preventDefault());
+      });
+
+      // Mouse Events
+      slider.addEventListener('mousedown', dragStart);
+      slider.addEventListener('mouseup', dragEnd);
+      slider.addEventListener('mouseleave', dragEnd);
+      slider.addEventListener('mousemove', dragAction);
+
+      // Touch Events
+      slider.addEventListener('touchstart', dragStart, { passive: true });
+      slider.addEventListener('touchend', dragEnd);
+      slider.addEventListener('touchmove', dragAction, { passive: true });
+    }
+
+    function getPositionX(event) {
+      return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+    }
+
+    function dragStart(event) {
+      isDragging = true;
+      startX = getPositionX(event);
+      clearInterval(tInterval); // pause auto slide
+      
+      const transformMatrix = window.getComputedStyle(tTrack).getPropertyValue('transform');
+      if (transformMatrix && transformMatrix !== 'none') {
+        const matrixValues = transformMatrix.split(', ');
+        prevTranslate = parseFloat(matrixValues[4]); // tx value
+      } else {
+        prevTranslate = 0;
+      }
+      
+      tTrack.style.transition = 'none'; // disable transitions for responsive drag
+    }
+
+    function dragAction(event) {
+      if (!isDragging) return;
+      const currentX = getPositionX(event);
+      const diff = currentX - startX;
+      currentTranslate = prevTranslate + diff;
+      
+      // Calculate bounds
+      const cardWidth = tCards[0].offsetWidth;
+      const maxIndex = tCards.length - cardsPerView;
+      const maxTranslate = -maxIndex * (cardWidth + 20);
+      
+      // Limit with soft resistance
+      if (currentTranslate > 0) {
+        currentTranslate = currentTranslate / 3;
+      } else if (currentTranslate < maxTranslate) {
+        const overscroll = currentTranslate - maxTranslate;
+        currentTranslate = maxTranslate + (overscroll / 3);
+      }
+      
+      tTrack.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function dragEnd(event) {
+      if (!isDragging) return;
+      isDragging = false;
+      
+      tTrack.style.transition = 'transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)';
+      
+      const cardWidth = tCards[0].offsetWidth;
+      const totalWidth = cardWidth + 20;
+      const movedBy = currentTranslate - prevTranslate;
+      
+      let targetIndex = tIndex;
+      if (movedBy < -50) {
+        targetIndex = Math.ceil(-currentTranslate / totalWidth);
+      } else if (movedBy > 50) {
+        targetIndex = Math.floor(-currentTranslate / totalWidth);
+      }
+      
+      const maxIndex = tCards.length - cardsPerView;
+      if (targetIndex < 0) targetIndex = 0;
+      if (targetIndex > maxIndex) targetIndex = maxIndex;
+      
+      goToSlide(targetIndex);
+      resetAutoSlide();
+    }
+  }
+
+  // 16. WhatsApp Floating Button Scroll Expansion
+  const whatsappBtn = document.querySelector('.whatsapp-btn');
+  if (whatsappBtn) {
+    const handleWhatsappScroll = () => {
+      if (window.scrollY > 150) {
+        whatsappBtn.classList.add('expanded');
+      } else {
+        whatsappBtn.classList.remove('expanded');
+      }
+    };
+    window.addEventListener('scroll', handleWhatsappScroll);
+    handleWhatsappScroll(); // init check
   }
 
   injectDecorations();
