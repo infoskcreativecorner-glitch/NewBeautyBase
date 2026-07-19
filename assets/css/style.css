@@ -653,7 +653,8 @@ header.scrolled .nav-container {
 
 @media (max-width: 768px) {
   .page-banner {
-    height: 320px;
+    height: 280px;
+    padding-top: 80px;
   }
   .page-banner h1 {
     font-size: 2.8rem;
@@ -1725,8 +1726,17 @@ textarea.form-control {
   }
 }
 @media (max-width: 768px) {
+  .contact-wrapper,
+  .maps-hours-section {
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+  .contact-detail-card {
+    padding: 20px;
+    gap: 15px;
+  }
   .booking-form-wrapper {
-    padding: 30px;
+    padding: 25px 20px;
   }
   .booking-form {
     grid-template-columns: 1fr;
@@ -1811,7 +1821,7 @@ textarea.form-control {
 footer {
   background: var(--color-dark);
   color: var(--color-light);
-  padding: 80px 0 30px;
+  padding: 50px 0 20px;
   border-top: 1px solid rgba(197, 168, 128, 0.2);
   margin-top: auto;
 }
@@ -1820,7 +1830,7 @@ footer {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
   gap: 50px;
-  margin-bottom: 60px;
+  margin-bottom: 35px;
 }
 
 .footer-logo h2 {
@@ -1920,7 +1930,7 @@ footer {
 /* Bottom Bar */
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.05);
-  padding-top: 30px;
+  padding-top: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -3751,6 +3761,7 @@ footer {
   font-size: 1.1rem;
   font-weight: 700;
   color: #B89047;
+  margin-left: 6px; /* Spacing between 'From' and price */
 }
 
 /* ==========================================
