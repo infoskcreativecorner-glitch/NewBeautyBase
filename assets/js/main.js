@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateSliderWidth = () => {
       const rect = sliderContainer.getBoundingClientRect();
-      afterImgTag.style.width = `${rect.width}px`;
+      afterImgTag.style.width = `${rect.width * 1.2}px`;
     };
     
     // Initialize image tag width

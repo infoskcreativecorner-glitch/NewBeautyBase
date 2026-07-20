@@ -654,7 +654,8 @@ header.scrolled .nav-container {
 @media (max-width: 768px) {
   .page-banner {
     height: 280px;
-    padding-top: 80px;
+    padding-top: 110px !important;
+    align-items: flex-start !important;
   }
   .page-banner h1 {
     font-size: 2.8rem;
@@ -1154,6 +1155,7 @@ header.scrolled .nav-container {
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .slider-img img {
@@ -1169,7 +1171,7 @@ header.scrolled .nav-container {
 
 .img-after {
   z-index: 2;
-  width: 50%; /* JS will change this */
+  width: 53%; /* JS will change this */
 }
 
 /* Let's make sure the images stack properly */
@@ -1177,7 +1179,7 @@ header.scrolled .nav-container {
   position: absolute;
   top: 0;
   left: 0;
-  width: 800px; /* Must match the max-width of container */
+  width: 960px;
   height: 550px;
   max-width: none !important;
 }
@@ -1186,7 +1188,7 @@ header.scrolled .nav-container {
   position: absolute;
   z-index: 10;
   top: 0;
-  left: 50%; /* JS will change this */
+  left: 53%; /* JS will change this */
   width: 4px;
   height: 100%;
   background: var(--color-gold);
@@ -1226,12 +1228,11 @@ header.scrolled .nav-container {
 }
 
 .label-before {
-  left: 20px;
-  z-index: 4;
+  right: 20px;
 }
 
 .label-after {
-  right: 20px;
+  left: 20px;
   z-index: 4;
 }
 
@@ -1659,6 +1660,8 @@ header.scrolled .nav-container {
 /* Luxury Booking Form */
 .booking-form-wrapper {
   padding: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-title {
@@ -1676,7 +1679,20 @@ header.scrolled .nav-container {
 .booking-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto 1fr auto;
   gap: 25px;
+  flex-grow: 1;
+}
+
+.form-group-textarea {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group-textarea textarea {
+  flex-grow: 1;
+  min-height: 140px;
+  height: 100%;
 }
 
 .form-group-full {
@@ -1731,18 +1747,51 @@ textarea.form-control {
     padding: 0 15px;
     box-sizing: border-box;
   }
+  .hours-card {
+    padding: 30px 20px !important;
+  }
+  .contact-info-cards {
+    text-align: center;
+  }
+  .contact-info-cards .section-subtitle,
+  .contact-info-cards h2 {
+    text-align: center;
+    width: 100%;
+  }
   .contact-detail-card {
-    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px 20px;
     gap: 15px;
   }
   .booking-form-wrapper {
-    padding: 25px 20px;
+    padding: 30px 20px;
+    background: #FAF5F5 !important;
+    border: 1px solid rgba(153, 55, 75, 0.1) !important;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(153, 55, 75, 0.05);
+  }
+  .form-title {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .form-subtitle {
+    font-size: 0.85rem;
+    text-align: center;
+    margin-bottom: 25px;
   }
   .booking-form {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
-  .form-group-full {
-    grid-column: span 1;
+  .booking-form .btn-fill {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 0.9rem;
   }
 }
 
@@ -1755,7 +1804,8 @@ textarea.form-control {
 }
 
 .map-container {
-  height: 450px;
+  height: 100%;
+  min-height: 450px;
   border: 1px solid rgba(197, 168, 128, 0.25);
   box-shadow: 0 20px 50px rgba(0,0,0,0.05);
 }
@@ -1769,10 +1819,13 @@ textarea.form-control {
 .hours-card {
   background: var(--color-light);
   color: var(--color-dark);
-  padding: 50px 40px;
+  padding: 40px;
   border-radius: 4px;
   border: 1px solid rgba(197, 168, 128, 0.3);
   box-shadow: 0 15px 45px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .hours-card h3 {
@@ -1812,6 +1865,7 @@ textarea.form-control {
   }
   .map-container {
     height: 350px;
+    min-height: auto;
   }
 }
 
@@ -2864,19 +2918,19 @@ footer {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: var(--color-primary);
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 15px;
   transition: var(--transition-smooth);
-  border: 1px solid rgba(153, 55, 75, 0.1);
-  box-shadow: 0 8px 20px rgba(153, 55, 75, 0.15);
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 4px 10px rgba(153, 55, 75, 0.05);
 }
 
 .category-icon-wrapper i {
   font-size: 2rem;
-  color: #FAF5F5;
+  color: var(--color-primary);
   transition: var(--transition-smooth);
 }
 
@@ -2888,14 +2942,14 @@ footer {
 }
 
 .category-circle-item:hover .category-icon-wrapper {
-  background: var(--color-blush-soft);
+  background: var(--color-primary);
   transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(153, 55, 75, 0.1);
-  border-color: rgba(153, 55, 75, 0.2);
+  box-shadow: 0 12px 25px rgba(153, 55, 75, 0.2);
+  border-color: var(--color-primary);
 }
 
 .category-circle-item:hover .category-icon-wrapper i {
-  color: var(--color-primary);
+  color: #FAF5F5;
 }
 
 @media (max-width: 991px) {
