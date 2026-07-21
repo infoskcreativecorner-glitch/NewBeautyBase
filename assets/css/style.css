@@ -1238,11 +1238,11 @@ header.scrolled .nav-container {
 
 @media (max-width: 768px) {
   .slider-container {
-    height: 380px;
+    height: auto !important;
+    aspect-ratio: 800 / 550;
   }
   .slider-img-after-img {
-    height: 380px;
-    width: 100vw; /* Responsive override for slider inner content via JS later */
+    height: 100% !important;
   }
 }
 
