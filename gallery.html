@@ -5,9 +5,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery | New Beauty Base Luxury Salon Chennai</title>
   <meta name="description" content="Browse our luxury hair styling, advanced skincare treatments, and bridal transformations gallery at New Beauty Base, T. Nagar.">
+  
+  <script>
+    // Canonical Redirect Logic to newbeautybase.com
+    (function() {
+      var primaryDomain = 'newbeautybase.com';
+      var hostname = window.location.hostname;
+      if (hostname && hostname !== primaryDomain && hostname !== 'www.' + primaryDomain && hostname !== 'localhost' && hostname !== '127.0.0.1') {
+        var canonicalUrl = 'https://' + primaryDomain + window.location.pathname + window.location.search + window.location.hash;
+        window.location.replace(canonicalUrl);
+      }
+    })();
+  </script>
+  <link rel="canonical" href="https://newbeautybase.com/gallery.html">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://newbeautybase.com/gallery.html">
+  <meta property="og:title" content="Gallery | New Beauty Base Luxury Salon Chennai">
+  <meta property="og:description" content="Browse our luxury hair styling, advanced skincare treatments, and bridal transformations gallery at New Beauty Base, T. Nagar.">
+  <meta property="og:image" content="https://newbeautybase.com/assets/images/Logo.png">
+  <meta property="og:site_name" content="New Beauty Base">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://newbeautybase.com/gallery.html">
+  <meta name="twitter:title" content="Gallery | New Beauty Base Luxury Salon Chennai">
+  <meta name="twitter:description" content="Browse our luxury hair styling, advanced skincare treatments, and bridal transformations gallery at New Beauty Base, T. Nagar.">
+  <meta name="twitter:image" content="https://newbeautybase.com/assets/images/Logo.png">
+
+  <!-- Preconnect & DNS Prefetch -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+  <!-- Preload Critical CSS -->
+  <link rel="preload" href="assets/css/style.css" as="style">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+
+  <!-- Stylesheets -->
   <link rel="icon" type="image/png" href="assets/images/Logo.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://newbeautybase.com/gallery.html#webpage",
+        "url": "https://newbeautybase.com/gallery.html",
+        "name": "Gallery | New Beauty Base Luxury Salon Chennai",
+        "description": "Browse our luxury hair styling, advanced skincare treatments, and bridal transformations gallery at New Beauty Base, T. Nagar.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://newbeautybase.com/#website",
+          "url": "https://newbeautybase.com/",
+          "name": "New Beauty Base"
+        },
+        "breadcrumb": {
+          "@id": "https://newbeautybase.com/gallery.html#breadcrumb"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://newbeautybase.com/gallery.html#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://newbeautybase.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Gallery",
+            "item": "https://newbeautybase.com/gallery.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -83,16 +168,25 @@
         
         <!-- 1. Bridal: Traditional Saree Makeover -->
         <div class="gallery-item reveal-up" data-category="bridal">
-          <img src="assets/images/Bridal/SaveClip.App_536420873_18046980212642310_5366353500205603959_n.jpg" alt="Bridal Saree & Hair Transformation">
+          <img src="assets/images/Bridal/SaveClip.App_536420873_18046980212642310_5366353500205603959_n.jpg" alt="Bridal Saree & Hair Transformation" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Traditional Saree Makeover</h4>
             <p>Bridal Makeup</p>
           </div>
         </div>
 
+        <!-- 1b. Bridal: Luxury Bridal Portrait -->
+        <div class="gallery-item reveal-up" data-category="bridal">
+          <img src="assets/images/WhatsA.jpeg" alt="Luxury Bridal Portrait Makeover" loading="lazy">
+          <div class="gallery-item-overlay">
+            <h4>Luxury Bridal Portrait</h4>
+            <p>Bridal Makeup</p>
+          </div>
+        </div>
+
         <!-- 2. Hair: Floral Braid Artistry -->
         <div class="gallery-item reveal-up" data-category="hair">
-          <img src="assets/images/Hair/SaveClip.App_619510331_17956262475025472_4133557528405504175_n.jpg" alt="Elegant Hair braid styling">
+          <img src="assets/images/Hair/SaveClip.App_619510331_17956262475025472_4133557528405504175_n.jpg" alt="Elegant Hair braid styling" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Floral Braid Artistry</h4>
             <p>Hair Styling</p>
@@ -101,7 +195,7 @@
 
         <!-- 3. Makeup: Soft Glam Makeover -->
         <div class="gallery-item reveal-up" data-category="makeup">
-          <img src="assets/images/Makeup/SaveClip.App_651508000_17949431738965788_8704522706458059701_n.jpg" alt="Glamorous Face Makeup">
+          <img src="assets/images/Makeup/SaveClip.App_651508000_17949431738965788_8704522706458059701_n.jpg" alt="Glamorous Face Makeup" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Soft Glam Makeover</h4>
             <p>Makeup Art</p>
@@ -110,7 +204,7 @@
 
         <!-- 4. Skin: Advanced Skincare Facials -->
         <div class="gallery-item reveal-up" data-category="skin">
-          <img src="assets/images/Skin/SaveClip.App_623316156_18034418495779643_4834180849815484666_n.jpg" alt="Gold facial skincare glow">
+          <img src="assets/images/Skin/SaveClip.App_623316156_18034418495779643_4834180849815484666_n.jpg" alt="Gold facial skincare glow" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Advanced Skincare Facials</h4>
             <p>Skincare</p>
@@ -119,7 +213,7 @@
 
         <!-- 5. Bridal: Classic South Indian Bride -->
         <div class="gallery-item reveal-up" data-category="bridal">
-          <img src="assets/images/Bridal/SaveClip.App_536555819_18046980233642310_6885604469527837679_n.jpg" alt="Classic Bridal Makeup">
+          <img src="assets/images/Bridal/SaveClip.App_536555819_18046980233642310_6885604469527837679_n.jpg" alt="Classic Bridal Makeup" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Classic South Indian Bride</h4>
             <p>Bridal Makeup</p>
@@ -128,7 +222,7 @@
 
         <!-- 6. Nails: Luxury Nail Extensions -->
         <div class="gallery-item reveal-up" data-category="nails">
-          <img src="assets/images/nails.png" alt="Premium custom manicure extensions">
+          <img src="assets/images/nails.png" alt="Premium custom manicure extensions" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Luxury Nail Extensions</h4>
             <p>Nails Art</p>
@@ -137,7 +231,7 @@
 
         <!-- 7. Hair: Dimensional Balayage Highlights -->
         <div class="gallery-item reveal-up" data-category="hair">
-          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.37 PM (2).jpeg" alt="Balayage Highlights Before">
+          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.37 PM (2).jpeg" alt="Balayage Highlights Before" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Dimensional Balayage Highlights</h4>
             <p>Hair Styling</p>
@@ -146,7 +240,7 @@
 
         <!-- 8. Makeup: Dewy Airbrush Makeup -->
         <div class="gallery-item reveal-up" data-category="makeup">
-          <img src="assets/images/Makeup/SaveClip.App_656278066_18092037382890537_6222128673489751158_n.jpg" alt="Sleek Reception Makeup">
+          <img src="assets/images/Makeup/SaveClip.App_656278066_18092037382890537_6222128673489751158_n.jpg" alt="Sleek Reception Makeup" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Dewy Airbrush Makeup</h4>
             <p>Makeup Art</p>
@@ -155,7 +249,7 @@
 
         <!-- 9. Bridal: Royal Temple Look -->
         <div class="gallery-item reveal-up" data-category="bridal">
-          <img src="assets/images/Bridal/SaveClip.App_537625812_18046980209642310_1481815965937237172_n.jpg" alt="Bridal Ceremony Look">
+          <img src="assets/images/Bridal/SaveClip.App_537625812_18046980209642310_1481815965937237172_n.jpg" alt="Bridal Ceremony Look" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Royal Temple Look</h4>
             <p>Bridal Makeup</p>
@@ -164,7 +258,7 @@
 
         <!-- 10. Hair: Smoothening Transformation -->
         <div class="gallery-item reveal-up" data-category="hair">
-          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.37 PM.jpeg" alt="Smoothening Hair Transformation Before">
+          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.37 PM.jpeg" alt="Smoothening Hair Transformation Before" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Smoothening Transformation</h4>
             <p>Hair Styling</p>
@@ -173,7 +267,7 @@
 
         <!-- 11. Makeup: Subtle Festive Makeover -->
         <div class="gallery-item reveal-up" data-category="makeup">
-          <img src="assets/images/Makeup/Makeup Transformation/WhatsApp Image 2026-07-10 at 6.26.40 PM (2).jpeg" alt="Subtle Party Makeup">
+          <img src="assets/images/Makeup/Makeup Transformation/WhatsApp Image 2026-07-10 at 6.26.40 PM (2).jpeg" alt="Subtle Party Makeup" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Subtle Festive Makeover</h4>
             <p>Makeup Art</p>
@@ -182,7 +276,7 @@
 
         <!-- 12. Bridal: Traditional Bridal Hair & Face -->
         <div class="gallery-item reveal-up" data-category="bridal">
-          <img src="assets/images/Bridal/WhatsApp Image 2026-07-10 at 6.26.39 PM.jpeg" alt="South Indian Bridal Portrait">
+          <img src="assets/images/Bridal/WhatsApp Image 2026-07-10 at 6.26.39 PM.jpeg" alt="South Indian Bridal Portrait" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Traditional Bridal Hair & Face</h4>
             <p>Bridal Makeup</p>
@@ -191,7 +285,7 @@
 
         <!-- 13. Hair: Bouncy Hair Curling -->
         <div class="gallery-item reveal-up" data-category="hair">
-          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.46 PM (2).jpeg" alt="Bouncy Curly Styling After">
+          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.46 PM (2).jpeg" alt="Bouncy Curly Styling After" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Bouncy Hair Curling</h4>
             <p>Hair Styling</p>
@@ -200,7 +294,7 @@
 
         <!-- 14. Makeup: HD Reception Makeover -->
         <div class="gallery-item reveal-up" data-category="makeup">
-          <img src="assets/images/Makeup/WhatsApp Image 2026-07-10 at 6.26.42 PM.jpeg" alt="Premium HD Party Look">
+          <img src="assets/images/Makeup/WhatsApp Image 2026-07-10 at 6.26.42 PM.jpeg" alt="Premium HD Party Look" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>HD Reception Makeover</h4>
             <p>Makeup Art</p>
@@ -209,7 +303,7 @@
 
         <!-- 15. Bridal: Modern Reception Glow -->
         <div class="gallery-item reveal-up" data-category="bridal">
-          <img src="assets/images/Bridal/SaveClip.App_537700058_18046980194642310_3336771601165317503_n.jpg" alt="Flawless Reception Hair & Face">
+          <img src="assets/images/Bridal/SaveClip.App_537700058_18046980194642310_3336771601165317503_n.jpg" alt="Flawless Reception Hair & Face" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Modern Reception Glow</h4>
             <p>Bridal Makeup</p>
@@ -218,7 +312,7 @@
 
         <!-- 16. Hair: Premium Caramel Balayage -->
         <div class="gallery-item reveal-up" data-category="hair">
-          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.38 PM.jpeg" alt="Balayage Highlights After">
+          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.38 PM.jpeg" alt="Balayage Highlights After" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Premium Caramel Balayage</h4>
             <p>Hair Styling</p>
@@ -227,7 +321,7 @@
 
         <!-- 17. Makeup: Radiant Reception Styling -->
         <div class="gallery-item reveal-up" data-category="makeup">
-          <img src="assets/images/Reception/WhatsApp Image 2026-07-10 at 6.26.41 PM (2).jpeg" alt="Reception Hair & Lash Styling">
+          <img src="assets/images/Reception/WhatsApp Image 2026-07-10 at 6.26.41 PM (2).jpeg" alt="Reception Hair & Lash Styling" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Radiant Reception Styling</h4>
             <p>Makeup Art</p>
@@ -236,7 +330,7 @@
 
         <!-- 18. Bridal: Signature Bridal Glow -->
         <div class="gallery-item reveal-up" data-category="bridal">
-          <img src="assets/images/Bridal/WhatsApp Image 2026-07-10 at 6.26.39 PM (1).jpeg" alt="South Indian Bride Close Up">
+          <img src="assets/images/Bridal/WhatsApp Image 2026-07-10 at 6.26.39 PM (1).jpeg" alt="South Indian Bride Close Up" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Signature Bridal Glow</h4>
             <p>Bridal Makeup</p>
@@ -245,7 +339,7 @@
 
         <!-- 19. Saree Draping: Premium Saree Pleat Draping -->
         <div class="gallery-item reveal-up" data-category="bridal">
-          <img src="assets/images/Saree Drapping/WhatsApp Image 2026-07-10 at 6.26.38 PM (1).jpeg" alt="Elegant Saree Draping Design">
+          <img src="assets/images/Saree Drapping/WhatsApp Image 2026-07-10 at 6.26.38 PM (1).jpeg" alt="Elegant Saree Draping Design" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Premium Saree Pleat Draping</h4>
             <p>Bridal Makeup</p>
@@ -254,7 +348,7 @@
 
         <!-- 20. Hair: Glossy Silk Smoothening -->
         <div class="gallery-item reveal-up" data-category="hair">
-          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.37 PM (1).jpeg" alt="Smoothening Hair Transformation After">
+          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.37 PM (1).jpeg" alt="Smoothening Hair Transformation After" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Glossy Silk Smoothening</h4>
             <p>Hair Styling</p>
@@ -263,7 +357,7 @@
 
         <!-- 21. Makeup: Reception & Evening Styling -->
         <div class="gallery-item reveal-up" data-category="makeup">
-          <img src="assets/images/Reception/res.jpeg" alt="Reception & Evening Styling">
+          <img src="assets/images/Reception/res.jpeg" alt="Reception & Evening Styling" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Reception & Evening Styling</h4>
             <p>Makeup Art</p>
@@ -272,7 +366,7 @@
 
         <!-- 22. Bridal: Luxury Lehenga Bride -->
         <div class="gallery-item reveal-up" data-category="bridal">
-          <img src="assets/images/Bridal/SaveClip.App_623769838_18088012769029012_9065740999286622806_n.jpg" alt="Stunning Bridal Lehenga Transformation">
+          <img src="assets/images/Bridal/SaveClip.App_623769838_18088012769029012_9065740999286622806_n.jpg" alt="Stunning Bridal Lehenga Transformation" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Luxury Lehenga Bride</h4>
             <p>Bridal Makeup</p>
@@ -281,7 +375,7 @@
 
         <!-- 23. Hair: Volume Curl Styling -->
         <div class="gallery-item reveal-up" data-category="hair">
-          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.47 PM.jpeg" alt="Curly Styling Before">
+          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.47 PM.jpeg" alt="Curly Styling Before" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Volume Curl Styling</h4>
             <p>Hair Styling</p>
@@ -290,7 +384,7 @@
 
         <!-- 24. Makeup: Premium Party Makeover -->
         <div class="gallery-item reveal-up" data-category="makeup">
-          <img src="assets/images/Reception/WhatsApp Image 2026-07-10 at 6.26.43 PM (1).jpeg" alt="Elegant Dupatta Setting">
+          <img src="assets/images/Reception/WhatsApp Image 2026-07-10 at 6.26.43 PM (1).jpeg" alt="Elegant Dupatta Setting" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Premium Party Makeover</h4>
             <p>Makeup Art</p>
@@ -299,7 +393,7 @@
 
         <!-- 25. Bridal: Bridal Prep & Draping -->
         <div class="gallery-item reveal-up" data-category="bridal">
-          <img src="assets/images/Bridal/WhatsApp Image 2026-07-10 at 6.26.39 PM (2).jpeg" alt="Bridal Prep Look">
+          <img src="assets/images/Bridal/WhatsApp Image 2026-07-10 at 6.26.39 PM (2).jpeg" alt="Bridal Prep Look" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Bridal Prep & Draping</h4>
             <p>Bridal Makeup</p>
@@ -308,7 +402,7 @@
 
         <!-- 26. Hair: Keratin Therapy Prep -->
         <div class="gallery-item reveal-up" data-category="hair">
-          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.36 PM.jpeg" alt="Hair Treatment Prep">
+          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.36 PM.jpeg" alt="Hair Treatment Prep" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Keratin Therapy Prep</h4>
             <p>Hair Styling</p>
@@ -317,7 +411,7 @@
 
         <!-- 27. Makeup: Glow Event Artistry -->
         <div class="gallery-item reveal-up" data-category="makeup">
-          <img src="assets/images/Reception/WhatsApp Image 2026-07-10 at 6.26.44 PM.jpeg" alt="Signature Event Look">
+          <img src="assets/images/Reception/WhatsApp Image 2026-07-10 at 6.26.44 PM.jpeg" alt="Signature Event Look" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Glow Event Artistry</h4>
             <p>Makeup Art</p>
@@ -326,7 +420,7 @@
 
         <!-- 28. Saree Draping: Silk Saree Muhurtham Draping -->
         <div class="gallery-item reveal-up" data-category="bridal">
-          <img src="assets/images/Saree Drapping/WhatsApp Image 2026-07-10 at 6.26.42 PM (2).jpeg" alt="Classic Silk Saree Setting">
+          <img src="assets/images/Saree Drapping/WhatsApp Image 2026-07-10 at 6.26.42 PM (2).jpeg" alt="Classic Silk Saree Setting" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Silk Saree Muhurtham Draping</h4>
             <p>Bridal Makeup</p>
@@ -335,7 +429,7 @@
 
         <!-- 29. Hair: Glossy Keratin Reconstruction -->
         <div class="gallery-item reveal-up" data-category="hair">
-          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.44 PM (1).jpeg" alt="Post Keratin Finish">
+          <img src="assets/images/Hair/WhatsApp Image 2026-07-10 at 6.26.44 PM (1).jpeg" alt="Post Keratin Finish" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Glossy Keratin Reconstruction</h4>
             <p>Hair Styling</p>
@@ -344,7 +438,7 @@
 
         <!-- 30. Bridal: Pastel Muhurtham Glam -->
         <div class="gallery-item reveal-up" data-category="bridal">
-          <img src="assets/images/Bridal/SaveClip.App_625021986_18060929777324730_4233077726558419560_n.jpg" alt="Pastel Bridal Makeover Styling">
+          <img src="assets/images/Bridal/SaveClip.App_625021986_18060929777324730_4233077726558419560_n.jpg" alt="Pastel Bridal Makeover Styling" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Pastel Muhurtham Glam</h4>
             <p>Bridal Makeup</p>
@@ -353,7 +447,7 @@
 
         <!-- 31. Hair: Luxury Bun Hairstyling -->
         <div class="gallery-item reveal-up" data-category="hair">
-          <img src="assets/images/Hair/SaveClip.App_656268388_18136091134455088_6697401549078240892_n.jpg" alt="Reception Hair Design">
+          <img src="assets/images/Hair/SaveClip.App_656268388_18136091134455088_6697401549078240892_n.jpg" alt="Reception Hair Design" loading="lazy">
           <div class="gallery-item-overlay">
             <h4>Luxury Bun Hairstyling</h4>
             <p>Hair Styling</p>
