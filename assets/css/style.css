@@ -351,7 +351,8 @@ header.scrolled .nav-container {
   transition: var(--transition-smooth);
 }
 
-.logo-text h1 {
+.logo-text h1,
+.logo-text .logo-title {
   font-family: var(--font-serif);
   font-size: 1.3rem;
   font-weight: 600;
@@ -359,6 +360,7 @@ header.scrolled .nav-container {
   color: var(--color-dark);
   text-transform: uppercase;
   transition: var(--transition-smooth);
+  display: block;
 }
 .logo-text p {
   font-family: var(--font-sans);
@@ -2601,7 +2603,8 @@ footer {
     height: 56px;
     width: 56px;
   }
-  .logo-text h1 {
+  .logo-text h1,
+  .logo-text .logo-title {
     font-size: 1rem;
     letter-spacing: 0.5px;
   }

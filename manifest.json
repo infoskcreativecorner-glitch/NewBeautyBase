@@ -1,0 +1,15 @@
+{
+  "short_name": "BeautyBase",
+  "name": "New Beauty Base Luxury Salon",
+  "icons": [
+    {
+      "src": "assets/images/Logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/index.html",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "theme_color": "#d985a6"
+}
